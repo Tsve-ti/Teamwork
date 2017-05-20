@@ -85,6 +85,21 @@ namespace Blog.UI.Tests
             loginPage.AssertNoEmailAddressDetected("Password");
         }
 
+        [Test, Property("Priority", 1)]
+        [Author("TSV")]
+        public void ValidLogInToFail()
+        {
+            // IWebDriver driver = BrowserHost.Instance.Application.Browser;
+
+            var loginPage = new LoginPage(this.driver);
+            LogIn user = new LogIn("Tsvetelina@abv.bg", "123456");
+            //var logIn = AccessExcelData.GetTestData("ValidLogin");
+            loginPage.NavigatetoBlogLogIn();
+            loginPage.FillLogInFormHardCode(user);
+            loginPage.AssertValidLogIn1(("Goodbye"));
+            loginPage.AssertValidLogIn2("Log off");
+        }
+
     }
 }
 
