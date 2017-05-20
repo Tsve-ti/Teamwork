@@ -1,5 +1,6 @@
 ﻿using Blog.UI.Tests.Models;
 using Blog.UI.Tests.Pages.Login;
+using Blog.UITests.Models;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using System;
@@ -36,6 +37,17 @@ namespace Blog.UI.Tests
             loginPage.FillLogInFormHardCode(user);
             loginPage.AssertValidLogIn1(("Hello"));
             loginPage.AssertValidLogIn2("Log off");
+        }
+
+        [Test, Property("Priority", 1)]
+        [Author("Anonymous")]
+        public void TryToLogInNoEmailAddress()
+        {
+            var loginPage = new LoginPage(this.driver);
+            var logIn = AccessExcelData.GetTestData("No Email Address");
+            loginPage.NavigatetoBlogLogIn();
+            loginPage.FillLogInForm(logIn);
+            loginPage.AssertNoEmailAddressDetected("The Email field is required");
         }
 
     }
